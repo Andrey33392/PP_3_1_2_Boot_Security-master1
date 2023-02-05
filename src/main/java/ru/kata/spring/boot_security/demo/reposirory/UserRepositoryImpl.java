@@ -40,6 +40,7 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public void updateUser(User user) {
+
         entityManager.merge(user);
 
     }

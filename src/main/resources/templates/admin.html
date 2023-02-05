@@ -18,22 +18,30 @@
         <th>name</th>
         <th>Email</th>
         <th>age</th>
+        <th>password</th>
+        <th>role</th>
+
         <th></th>
         <th></th>
     </tr>
     <tr th:each="user : ${users}">
-        <td><a th:href="@{/user/{id}(id=${user.id})}" th:text="${user.getId()}">user</a></td>
-        <td><a th:href="@{/user/{id}(id=${user.getId()})}" th:text="${user.getName()}">user</a></td>
-        <td><a th:href="@{/user/{id}(id=${user.getId()})}" th:text="${user.getEmail()}">user</a></td>
-        <td><a th:href="@{/user/{id}(id=${user.getId()})}" th:text="${user.getAge()}">user</a></td>
+        <td><a th:href="@{/user_id/{id}(id=${user.id})}" th:text="${user.getId()}">user</a></td>
+        <td><a th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getName()}">user</a></td>
+        <td><a th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getEmail()}">user</a></td>
+        <td><a th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getAge()}">user</a></td>
+        <td><a th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getPassword()}">user</a></td>
+        <td><a th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getRoles()}">user</a></td>
         <td><a th:href="@{/edit/{id}(id =${user.getId()})}">edit</a></td>
-        <td><a th:href="@{/user/{id}(id =${user.getId()})}">delete</a></td>
+        <td><a th:href="@{/user_id/{id}(id =${user.getId()})}">delete</a></td>
 
 
     </tr>
 
 
 </table>
+<br/>
+
+<button onclick="window.location.href = '/';">Home</button>
 
 </body>
 </html>

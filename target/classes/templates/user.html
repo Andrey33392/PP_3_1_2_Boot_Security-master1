@@ -4,11 +4,19 @@
     <title>Spring Security Example</title>
 </head>
 <body>
-<h1>User, welcome spring boot security page!</h1>
 
 
 <div sec:authorize="isAuthenticated()">
-    Hello! You Email- <span sec:authentication="name"></span></div>
+    Hello -  <span sec:authentication="name"></span></div>
+
+
+<h1>User, welcome spring boot security page!</h1>
+<button onclick="window.location.href = '/admin';">Admin</button>
+
 <br/>
+
+<button onclick="window.location.href = '/logout';">logout</button>
+<br/>
+<button onclick="window.location.href = '/registration';">Registration</button>
 </body>
 </html>
