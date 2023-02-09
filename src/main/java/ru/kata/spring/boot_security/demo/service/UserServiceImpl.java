@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import java.rmi.AlreadyBoundException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public void saveUser(User user) {
 
-        user.setRoles(Collections.singleton(new Role(1)));
+        user.setRoles(Collections.singleton(new Role(1, "ROLE_USER")));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.saveUser(user);
 
@@ -56,6 +57,9 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public void updateUser(User user) {
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         userRepository.updateUser(user);
 
     }

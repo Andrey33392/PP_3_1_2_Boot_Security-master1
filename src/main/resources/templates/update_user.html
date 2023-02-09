@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/edit/{id}(id=${user.id})}" th:object="${user}">
+<form th:method="PATCH" th:action="@{/edit_user/{id}(id=${user.id})}" th:object="${user}">
 
 
     <label for="id">id</label>
@@ -28,17 +28,18 @@
     <br>
     <label for="password">Password</label>
     <input type="password" th:field="*{password}" id="password"/>
-    <!--        <div style="color: brown" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">error</div>-->
+
+    <div style="color: brown" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error</div>
     <br>
     <td>
         <label>Roles:
-            <select size="2" multiple name="listRoles" required="required">
+            <select size="1" multiple name="listRoles" required="required">
                 <option selected="selected" value="1">USER</option>
-                <option value="2">ADMIN</option>
+
             </select>
         </label>
-    <br>
-    <input type="submit" value="Update User"/>
+        <br>
+        <input type="submit" value="Update User"/>
 
 </form>
 </body>

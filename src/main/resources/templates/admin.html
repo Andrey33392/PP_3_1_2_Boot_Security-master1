@@ -30,7 +30,10 @@
         <td><a th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getEmail()}">user</a></td>
         <td><a th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getAge()}">user</a></td>
         <td><a th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getPassword()}">user</a></td>
-        <td><a th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getRoles()}">user</a></td>
+        <td
+                th:block th:each="role : *{user.getRoles()}">
+            &nbsp;<span th:text="${role.name}"/>
+        </td>
         <td><a th:href="@{/edit/{id}(id =${user.getId()})}">edit</a></td>
         <td><a th:href="@{/user_id/{id}(id =${user.getId()})}">delete</a></td>
 
@@ -41,7 +44,6 @@
 </table>
 <br/>
 
-<button onclick="window.location.href = '/';">Home</button>
-
+<button onclick="window.location.href = '/logout';">logout</button>
 </body>
 </html>

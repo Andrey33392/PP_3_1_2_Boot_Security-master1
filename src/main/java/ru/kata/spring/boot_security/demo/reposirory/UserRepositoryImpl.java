@@ -5,6 +5,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -12,14 +13,14 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
-public class UserRepositoryImpl implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
     public List<User> findAll() {
-        return entityManager.createQuery("SELECT user from User user", User.class).getResultList();
+        return entityManager.createQuery("SELECT u from User u").getResultList();
     }
 
     @Override
@@ -34,7 +35,9 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public void deleteUserById(Long id) {
-        entityManager.remove(getById(id));
+        Query query = entityManager.createQuery("delete from User user where user.id = :id");
+        query.setParameter("id",id);
+        query.executeUpdate();
 
     }
 
@@ -47,9 +50,9 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public User findByEmail(String email) {
-        return (User) entityManager.createQuery("SELECT user FROM  User user WHERE  user.email=:email")
-                .setParameter("email", email)
-                .getSingleResult();
+         TypedQuery <User> query = (entityManager.createQuery("SELECT user FROM  User user Join fetch  user.roles WHERE  user.email=:email", User.class));
+                query.setParameter("email", email);
+               return query.getSingleResult();
 
 
 //        TypedQuery<User> query = entityManager.createQuery("SELECT user FROM User user where user.email=:email",

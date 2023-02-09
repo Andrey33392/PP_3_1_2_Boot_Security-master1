@@ -13,6 +13,8 @@
     <th>name</th>
     <th>Email</th>
     <th>age</th>
+    <th>password</th>
+    <th>role</th>
     <th>edit</th>
   </tr>
   <tr>
@@ -20,19 +22,19 @@
     <td th:text="${user.getName()}">Name</td>
     <td th:text="${user.getEmail()}">Email</td>
     <td th:text="${user.getAge()}">Age</td>
+    <td th:text="${user.getPassword()}">Password</td>
+    <td th:text="${user.getRoles()}">Role</td>
     <td><a style="color: orange" th:href="@{/edit/{id}(id =${user.getId()})}">edit</a></td>
   </tr>
 
   </br>
-  <form style="color: red" th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}" th:object="${user}">
+  <form style="color: red" th:method="DELETE" th:action="@{/delete/{id}(id=${user.getId()})}" th:object="${user}">
     <input type="submit" value="Delete"></form>
 
 
 </table>
 <br/>
 
-<button onclick="window.location.href = '/';">Home</button>
-<br/>
 <button onclick="window.location.href = '/logout';">logout</button>
 <br/>
 <button onclick="window.location.href = '/registration';">Registration</button>

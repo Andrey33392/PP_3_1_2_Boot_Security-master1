@@ -1,16 +1,40 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Spring Security Example</title>
 </head>
 <body>
-
-
-<div sec:authorize="isAuthenticated()">
-    Hello -  <span sec:authentication="name"></span></div>
-
-
 <h1>User, welcome spring boot security page!</h1>
+
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>Email</th>
+        <th>age</th>
+<!--        <th>password</th>-->
+<!--        <th>role</th>-->
+        <th>edit</th>
+    </tr>
+    <tr>
+        <td th:text="${user.getId()}">Id</td>
+        <td th:text="${user.getName()}">Name</td>
+        <td th:text="${user.getEmail()}">Email</td>
+        <td th:text="${user.getAge()}">Age</td>
+<!--        <td th:text="${user.getPassword()}">Password</td>-->
+<!--        <td-->
+<!--                th:block th:each="role : *{user.getRoles()}">-->
+<!--            &nbsp;<span th:text="${role.name}"/>-->
+<!--        </td>-->
+        <td><a style="color: orange" th:href="@{/edit_user/{id}(id =${user.getId()})}">edit</a></td>
+    </tr>
+
+
+
+
+
+</table>
 <button onclick="window.location.href = '/admin';">Admin</button>
 
 <br/>

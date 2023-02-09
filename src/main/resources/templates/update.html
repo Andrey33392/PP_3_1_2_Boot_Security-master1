@@ -11,7 +11,7 @@
 
 
     <label for="id">id</label>
-    <input type="text" th:field="*{id}" id="id"/>
+    <input type="number" th:field="*{id}" id="id"/>
     <!--        <div style="color: brown" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error</div>-->
     <br>
     <label for="name">Name</label>
@@ -19,7 +19,7 @@
     <!--        <div style="color: brown" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error</div>-->
     <br>
     <label for="email">Email</label>
-    <input type="text" th:field="*{email}" id="email"/>
+    <input type="email" th:field="*{email}" id="email"/>
     <!--        <div style="color: brown" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastName}">error</div>-->
     <br>
     <label for="age">Age</label>
@@ -27,12 +27,16 @@
     <!--        <div style="color: brown" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">error</div>-->
     <br>
     <label for="password">Password</label>
-    <input type="text" th:field="*{password}" id="password"/>
+    <input type="password" th:field="*{password}" id="password"/>
     <!--        <div style="color: brown" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">error</div>-->
     <br>
-    <label for="role">Role</label>
-    <input type="text" th:field="*{roles}" id="role"/>
-    <!--        <div style="color: brown" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">error</div>-->
+    <td>
+        <label>Roles:
+            <select size="2" multiple name="listRoles" required="required">
+                <option selected="selected" value="1">USER</option>
+                <option value="2">ADMIN</option>
+            </select>
+        </label>
     <br>
     <input type="submit" value="Update User"/>
 
