@@ -18,6 +18,7 @@ public class AuthController {
     private final UserService userService;
     private final UserValidator userValidator;
 
+
     public AuthController(UserService userService, UserValidator userValidator) {
         this.userService = userService;
         this.userValidator = userValidator;

@@ -20,8 +20,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> findAll() {
-        return entityManager.createQuery("SELECT u from User u").getResultList();
+        TypedQuery<User> query = entityManager.createQuery("SELECT u from User u ", User.class);
+        return query.getResultList();
     }
+
 
     @Override
     public User getById(Long id) {
@@ -30,6 +32,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void saveUser(User user) {
+
         entityManager.persist(user);
     }
 
