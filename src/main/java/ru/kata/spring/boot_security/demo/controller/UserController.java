@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
-import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
+import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -21,13 +21,14 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    public final UserServiceImpl userService;
+    public final UserService userService;
     private final RoleService roleService;
 
-    public UserController(UserServiceImpl userService, RoleService roleService) {
+    public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
+
 
     @GetMapping("/user")
     public String pageUser(Model model, Principal principal) {

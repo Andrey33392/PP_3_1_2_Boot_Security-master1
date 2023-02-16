@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
@@ -45,10 +45,9 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    public User(User user) {
-    }
 
-    public User(long id, String email, String age, String name, String password, String passwordConfirm, Set<Role> roles) {
+
+    public User(long id, String email, String age, String name, String password, Set<Role> roles) {
         this.id = id;
         this.email = email;
         this.age = age;
@@ -141,9 +140,6 @@ public class User implements UserDetails {
         return true;
     }
 
-    public User getUser(){
-        return getUser();
-    }
 
     @Override
     public boolean equals(Object o) {
