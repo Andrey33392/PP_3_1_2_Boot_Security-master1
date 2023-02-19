@@ -11,48 +11,114 @@
     </style>
 </head>
 <body>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <div class="container">
 
 
-            <button  class="badge badge-primary" onclick="window.location.href = '/admin';">User table</button>
+    <button class="badge badge-primary" onclick="window.location.href = '/admin';">User table</button>
 
 
-            <button class="badge badge-light" onclick="window.location.href = '/registration';">New user</button>
+    <button type="button" class="badge badge-light" data-toggle="modal" data-target="#exampleModal">
+        New user
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="row justify-content-center align-items-center bg-white">
+                    <form class="text-center" th:method="POST" th:action="@{/admin/addUser}"
+                          th:object="${userFrom}">
+                        <div class="form-group fw-bold">
+
+
+                            <div class="form-group m-3">
+                                <label for="NameNew" class="col-form-label">Name</label>
+                                <input type="text" class="form-control" id="NameNew"
+                                       name="Name" value="" required/>
+                            </div>
+
+                            <div class="form-group m-3">
+                                <label for="ageNew" class="col-form-label">Age</label>
+                                <input type="text" class="form-control" id="ageNew"
+                                       name="age" value="" required/>
+                            </div>
+
+                            <div class="form-group m-3">
+                                <label for="emailNew" class="col-form-label">Email</label>
+                                <input type="text" class="form-control" id="emailNew"
+                                       name="email" value="" required/>
+                            </div>
+
+                            <div class="form-group m-3">
+                                <label for="passwordNew" class="col-form-label">Password</label>
+                                <input type="password" class="form-control" id="passwordNew"
+                                       name="password" value="" required/>
+                            </div>
+
+                            <td>
+
+                                <label>Roles:
+                                    <br>
+                                    <select size="2" multiple name="listRoles" required="required">
+                                        <option selected="selected" value="1">USER</option>
+                                        <option value="2">ADMIN</option>
+                                    </select>
+                                </label>
+                        </div>
+                        <br>
+
+
+                        <button type="submit" class="btn btn-success">Add new user</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </form>
+                </div>
+
+            </div>
         </div>
+    </div>
+
+</div>
 
 <div class="container">
-<h1>All users</h1>
-<table class="table table-hover ">
-    <tr>
-        <th >id</th>
-        <th>name</th>
-        <th>Email</th>
-        <th>age</th>
-        <th>password</th>
-        <th>role</th>
+    <h1>All users</h1>
+    <table class="table table-hover ">
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>Email</th>
+            <th>age</th>
+            <th>password</th>
+            <th>role</th>
 
-        <th></th>
-        <th></th>
-    </tr>
-    <tr class="table" th:each="user : ${users}">
-        <td ><a class="text-black-50" th:href="@{/user_id/{id}(id=${user.id})}" th:text="${user.getId()}">user</a></td>
-        <td><a class="text-black-50" th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getName()}">user</a></td>
-        <td><a class="text-black-50" th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getEmail()}">user</a></td>
-        <td><a class="text-black-50" th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getAge()}">user</a></td>
-        <td><a class="text-black-50" th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getPassword()}">user</a></td>
-        <td
-                th:block  th:each="role : *{user.getRoles()}">
-            &nbsp;<span th:text="${role.name}" />
-        </td>
-        <td><a type="button" class="btn btn-primary" th:href="@{/edit/{id}(id =${user.getId()})}">Edit</a></td>
-        <td><a type="button" class="btn btn-danger" th:href="@{/user_id/{id}(id =${user.getId()})}">delete</a></td>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr class="table" th:each="user : ${users}">
+            <td><a class="text-black-50" th:href="@{/user_id/{id}(id=${user.id})}" th:text="${user.getId()}">user</a>
+            </td>
+            <td><a class="text-black-50" th:href="@{/user_id/{id}(id=${user.getId()})}"
+                   th:text="${user.getName()}">user</a></td>
+            <td><a class="text-black-50" th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getEmail()}">user</a>
+            </td>
+            <td><a class="text-black-50" th:href="@{/user_id/{id}(id=${user.getId()})}"
+                   th:text="${user.getAge()}">user</a></td>
+            <td><a class="text-black-50" th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getPassword()}">user</a>
+            </td>
+            <td
+                    th:block th:each="role : *{user.getRoles()}">
+                &nbsp;<span th:text="${role.name}"/>
+            </td>
+            <td><a type="button" class="btn btn-primary" th:href="@{/edit/{id}(id =${user.getId()})}">Edit</a></td>
+            <td><a type="button" class="btn btn-danger" th:href="@{/user_id/{id}(id =${user.getId()})}">delete</a></td>
 
 
-    </tr>
+        </tr>
 
 
-</table>
+    </table>
 </div>
 <br/>
 <div class="container">
@@ -64,8 +130,14 @@
         </div>
     </div>
 </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 </html>

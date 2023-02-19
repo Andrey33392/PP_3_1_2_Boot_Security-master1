@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.kata.spring.boot_security.demo.model.User;
@@ -66,6 +67,25 @@ public class AdminController {
     @DeleteMapping("delete/{id}")
     public String delete(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/admin/addUser")
+    public String createUser(Model model) {
+        model.addAttribute("userFrom", new User());
+        return "admin";
+    }
+
+    @PostMapping("/admin/addUser")
+    public String addUser(@ModelAttribute("userFrom") @Valid User user, BindingResult bindingResult,
+                          @RequestParam("listRoles") List<Long> roles) {
+//        userValidator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "admin";
+        }
+
+        user.setRoles(roleService.getRolesByIds(roles));
+        userService.saveUser(user);
         return "redirect:/admin";
     }
 }
