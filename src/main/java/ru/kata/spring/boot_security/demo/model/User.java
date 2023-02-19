@@ -13,7 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
+import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
@@ -35,19 +37,22 @@ public class User implements UserDetails {
     @Column(name = "name")
     private String name;
 
+    @NotEmpty(message = "Пароль не может быть пустым.")
+    @Size(min = 2, max = 100, message = "Password не может быть меньше 2-х символов и не превышать 100 символов.")
     @Column(name = "password")
     private String password;
 
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "users_roles",
+    @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    public User(User user) {
+    }
 
-
-    public User(long id, String email, String age, String name, String password, Set<Role> roles) {
+    public User(long id, String email, String age, String name, String password, String passwordConfirm, Set<Role> roles) {
         this.id = id;
         this.email = email;
         this.age = age;
@@ -140,6 +145,9 @@ public class User implements UserDetails {
         return true;
     }
 
+    public User getUser(){
+        return getUser();
+    }
 
     @Override
     public boolean equals(Object o) {

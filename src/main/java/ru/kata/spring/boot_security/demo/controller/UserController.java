@@ -8,27 +8,53 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
+import ru.kata.spring.boot_security.demo.util.UserValidator;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 
 @Controller
 public class UserController {
 
-    public final UserService userService;
+    public final UserServiceImpl userService;
     private final RoleService roleService;
 
-    public UserController(UserService userService, RoleService roleService) {
+    public UserController(UserServiceImpl userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
 
+
+    @GetMapping("/registration")
+    public String registration(Model model) {
+        model.addAttribute("userFrom", new User());
+        return "registration";
+    }
+
+    @PostMapping("/registration")
+    public String addUser(@ModelAttribute("userFrom") @Valid User user, BindingResult bindingResult,
+                          @RequestParam("listRoles") List<Long> roles) {
+//        userValidator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
+
+        user.setRoles(roleService.getRolesByIds(roles));
+        userService.saveUser(user);
+        return "redirect:/login";
+    }
 
     @GetMapping("/user")
     public String pageUser(Model model, Principal principal) {

@@ -25,6 +25,6 @@ public class RoleRepositoryImpl implements RoleRepository {
 
     @Override
     public List<Role> findAll() {
-        return entityManager.createQuery("SELECT r FROM Role r", Role.class).getResultList();
+        return entityManager.createQuery("SELECT r FROM Role r").getResultList();
     }
 }

@@ -13,21 +13,19 @@
 <body>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <span class="badge badge-primary"></span>
-            <button onclick="window.location.href = '/admin';">User table</button>
+
+
+            <button  class="badge badge-primary" onclick="window.location.href = '/admin';">User table</button>
+
+
+            <button class="badge badge-light" onclick="window.location.href = '/registration';">New user</button>
         </div>
-        <div class="col-sm">
-            <button onclick="window.location.href = '/registration';">New user</button>
-        </div>
-    </div>
-</div>
+
 <div class="container">
 <h1>All users</h1>
-<table class="table table-hover">
+<table class="table table-hover ">
     <tr>
-        <th>id</th>
+        <th >id</th>
         <th>name</th>
         <th>Email</th>
         <th>age</th>
@@ -37,18 +35,18 @@
         <th></th>
         <th></th>
     </tr>
-    <tr class="table-bordered" th:each="user : ${users}">
-        <td ><a th:href="@{/user_id/{id}(id=${user.id})}" th:text="${user.getId()}">user</a></td>
-        <td><a th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getName()}">user</a></td>
-        <td><a th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getEmail()}">user</a></td>
-        <td><a th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getAge()}">user</a></td>
-        <td><a th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getPassword()}">user</a></td>
+    <tr class="table" th:each="user : ${users}">
+        <td ><a class="text-black-50" th:href="@{/user_id/{id}(id=${user.id})}" th:text="${user.getId()}">user</a></td>
+        <td><a class="text-black-50" th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getName()}">user</a></td>
+        <td><a class="text-black-50" th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getEmail()}">user</a></td>
+        <td><a class="text-black-50" th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getAge()}">user</a></td>
+        <td><a class="text-black-50" th:href="@{/user_id/{id}(id=${user.getId()})}" th:text="${user.getPassword()}">user</a></td>
         <td
-                th:block th:each="role : *{user.getRoles()}">
-            &nbsp;<span th:text="${role.name}"/>
+                th:block  th:each="role : *{user.getRoles()}">
+            &nbsp;<span th:text="${role.name}" />
         </td>
-        <td><a th:href="@{/edit/{id}(id =${user.getId()})}">edit</a></td>
-        <td><a th:href="@{/user_id/{id}(id =${user.getId()})}">delete</a></td>
+        <td><a type="button" class="btn btn-primary" th:href="@{/edit/{id}(id =${user.getId()})}">Edit</a></td>
+        <td><a type="button" class="btn btn-danger" th:href="@{/user_id/{id}(id =${user.getId()})}">delete</a></td>
 
 
     </tr>
@@ -61,9 +59,10 @@
     <div class="row">
         <div class="col-1">
             <button onclick="window.location.href = '/logout';">logout</button>
+
+            <button onclick="window.location.href = '/';">Home</button>
         </div>
     </div>
-
 </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

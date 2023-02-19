@@ -31,13 +31,17 @@
 
     <div style="color: brown" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error</div>
     <br>
-    <td>
-        <label>Roles:
-            <select size="1" multiple name="listRoles" required="required">
-                <option selected="selected" value="1">USER</option>
+    <th:block th:each="role: ${listRoles}">
+        <input type="checkbox" th:field="*{roles}"
+               th:text="${role.name}" th:value="${role.id}" class="m-2" />
+    </th:block>
+<!--    <td>-->
+<!--        <label>Roles:-->
+<!--            <select size="1" multiple name="listRoles" required="required">-->
+<!--                <option selected="selected" value="1">USER</option>-->
 
-            </select>
-        </label>
+<!--            </select>-->
+<!--        </label>-->
         <br>
         <input type="submit" value="Update User"/>
 

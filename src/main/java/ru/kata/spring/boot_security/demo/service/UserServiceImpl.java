@@ -1,37 +1,34 @@
 package ru.kata.spring.boot_security.demo.service;
 
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
-
+import ru.kata.spring.boot_security.demo.reposirory.RoleRepository;
 import ru.kata.spring.boot_security.demo.reposirory.UserRepository;
 
 import javax.transaction.Transactional;
-
+import java.rmi.AlreadyBoundException;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Service
-public class UserServiceImpl implements UserService {
-
-
+public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
 
 
-    public UserServiceImpl(UserRepository userRepository) {
 
+
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
 
 
     }
 
-
-
     @Override
     public List<User> findAll() {
-
         return userRepository.findAll();
     }
 
@@ -43,7 +40,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void saveUser(User user) {
-       userRepository.saveUser(user);
+
+        userRepository.saveUser(user);
 
     }
 
@@ -57,6 +55,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void updateUser(User user) {
+
+
         userRepository.updateUser(user);
 
     }
@@ -65,6 +65,8 @@ public class UserServiceImpl implements UserService {
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
+
 
 
 }
